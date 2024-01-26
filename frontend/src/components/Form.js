@@ -1,14 +1,47 @@
 import React, { useRef, useState, useCallback } from "react";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import { useDropzone } from "react-dropzone";
-
+import axios from "axios";
+import baseURL from "./config.js";
+import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
 import Style from "./Form.module.css";
+import { validateFileExtension, processDatabaseData } from "./utils.js";
+
 const acceptedFileTypes = ["text/csv"];
-export default function Form() {
+
+export default function Form({ setChartData }) {
   const ref = useRef();
   const [selectedFile, setSelectedFile] = useState(null);
 
+  const handleFileUpload = async () => {
+    try {
+      const formData = new FormData();
+      formData.append("file", selectedFile);
+
+      const response = await axios.post(baseURL + "/api/files", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      const newData = processDatabaseData(response.data);
+      setChartData(newData);
+
+      setSelectedFile(null);
+      toast.success("File uploaded successfully");
+    } catch (error) {
+      setSelectedFile(null);
+      toast.error(error.response.data);
+    }
+  };
+
   const onDrop = useCallback((acceptedFiles) => {
+    if (acceptedFiles.length === 0) {
+      toast.error(
+        "The selected file is not a CSV file,Please select a CSV file"
+      );
+      return;
+    }
     setSelectedFile(acceptedFiles[0]);
   }, []);
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
@@ -97,10 +130,12 @@ export default function Form() {
         )}
       </div>
 
-      {selectedFile === null ? (
+      {!selectedFile ? (
         <button className={Style["upload__file__disable"]}>Upload File</button>
       ) : (
-        <button className={Style["upload__file"]}>Upload File</button>
+        <button className={Style["upload__file"]} onClick={handleFileUpload}>
+          Upload File
+        </button>
       )}
     </div>
   );

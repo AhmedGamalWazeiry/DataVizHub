@@ -3,7 +3,10 @@
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  width: 20%;
+  width: 100%;
+  max-width: 500px;
+  min-width: 300px;
+  transition: 1s;
 }
 .browse__card {
   display: flex;
@@ -110,4 +113,13 @@
   box-shadow: 0 2px 8px #8c8b93;
   transition: 0.3s;
   cursor: not-allowed;
+}
+
+@media screen and (max-width: 1024px) {
+  .form {
+    justify-content: flex-end;
+
+    height: 100%;
+    width: 80%;
+  }
 }
