@@ -118,9 +118,6 @@ const options = {
 };
 
 export default function Charts() {
-  const [chartData, setChartData] = useState();
-  const [chartDataOptions, setChartDataOptions] = useState();
-
   return (
     <div
       className={Style["charts__container"]}
