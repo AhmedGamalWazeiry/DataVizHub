@@ -1,0 +1,34 @@
+version: "3"
+
+networks:
+  default:
+    driver: bridge
+
+services:
+  db:
+    image: postgres:13
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - postgres_backups:/backups
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=postgres_db
+
+  api: &api
+    platform: linux/amd64
+    build:
+      context: backend
+    volumes:
+      - ./backend:/home/exampleapp
+      - analytics_storage:/analytics_storage
+
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+
+volumes:
+  postgres_data: {}
+  postgres_backups: {}
+  analytics_storage: {}
