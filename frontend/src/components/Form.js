@@ -52,7 +52,12 @@ export default function Form({ setChartData }) {
       );
       return;
     }
-    setSelectedFile(acceptedFiles[0]);
+    const file = acceptedFiles[0];
+    if (file.size <= 5 * 1024 * 1024) {
+      setSelectedFile(file);
+    } else {
+      toast.error("File size exceeds 5 MB limit");
+    }
   }, []);
   const { getRootProps, getInputProps } = useDropzone({
     accept: {
