@@ -9,7 +9,7 @@ import Style from "./Form.module.css";
 import { processDatabaseData } from "./utils.js";
 import { CircularProgressWithLabel } from "./CircularProgressWithLabel.js";
 
-export default function Form({ setChartData }) {
+export default function Form({ setChartData, setIsFileUploaded }) {
   const ref = useRef();
   const [selectedFile, setSelectedFile] = useState(null);
   const [uploadPercentage, setUploadPercentage] = useState(0);
@@ -32,6 +32,7 @@ export default function Form({ setChartData }) {
       });
       const newData = processDatabaseData(response.data);
       setChartData(newData);
+      setIsFileUploaded((prev) => !prev);
       toast.success("File uploaded successfully");
     } catch (error) {
       setSelectedFile(null);
@@ -53,6 +54,7 @@ export default function Form({ setChartData }) {
       return;
     }
     const file = acceptedFiles[0];
+
     if (file.size <= 5 * 1024 * 1024) {
       setSelectedFile(file);
     } else {

@@ -5,7 +5,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import baseURL from "../config.js";
 import axios from "axios";
 
-export default function Tap({ setChartData, chartData }) {
+export default function Tap({ setChartData, isFileUploaded }) {
   const [filesList, setFilesList] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [clickOnFileIndex, setClickOnFileIndex] = useState(-1);
@@ -16,6 +16,7 @@ export default function Tap({ setChartData, chartData }) {
   };
 
   const handleGetFiles = async () => {
+    setClickOnFileIndex(-1);
     try {
       const response = await axios.get(baseURL + "/api/files");
       setFilesList(response.data);
@@ -25,7 +26,7 @@ export default function Tap({ setChartData, chartData }) {
   };
   useEffect(() => {
     handleGetFiles();
-  }, [isFileDeleted, chartData]);
+  }, [isFileDeleted, isFileUploaded]);
 
   const renderFiles = () => {
     if (filesList.length === 0) {
@@ -35,7 +36,8 @@ export default function Tap({ setChartData, chartData }) {
     let renderFilesList = [];
 
     for (let i = 0; i < filesList.length; i++) {
-      const fileName = filesList[i].file.split("/").pop();
+      const parts = filesList[i].file.split("______");
+      const fileName = parts[0];
 
       if (fileName.toLowerCase().includes(searchQuery.toLowerCase())) {
         renderFilesList.push(

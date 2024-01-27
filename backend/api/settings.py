@@ -137,8 +137,8 @@ STATIC_URL = "/django_static/"
 STATIC_ROOT = "/storage/django_static"
 
 # Media files (Files, images, etc...)
-MEDIA_URL = "/chatbot_storage/"
-MEDIA_ROOT = "/chatbot_storage"
+MEDIA_URL = "/analytics_storage/"
+MEDIA_ROOT = "/analytics_storage"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
