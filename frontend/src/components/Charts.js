@@ -1,6 +1,4 @@
-//https://mui.com/store/previews/minimal-dashboard-free/
-
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Bar } from "react-chartjs-2";
 import zoomPlugin from "chartjs-plugin-zoom";
 import Style from "./Charts.module.css";

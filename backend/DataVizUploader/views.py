@@ -4,7 +4,7 @@ from rest_framework import status
 from rest_framework.parsers import MultiPartParser, JSONParser, FormParser,FileUploadParser
 from .models import FinancialDataSet,FinancialFile 
 from .serializers import FinancialFileSerializer,FinancialDataSetSerializer
-from .utils import process_csv_file,insert_data_into_financial_data_set
+from .utils import process_csv_file,insert_data_into_financial_data_set,get_data_sets_by_file_id
 
 class FileUploadListCreateView(ListCreateAPIView):
     queryset = FinancialFile.objects.all() 
@@ -34,6 +34,8 @@ class FileUploadListCreateView(ListCreateAPIView):
         
         file = serializer.save()
         
+        print(result_list)
+        
         try:
             insert_data_into_financial_data_set(return_data_object['data_frame'],file)
         except Exception as e :
@@ -41,12 +43,17 @@ class FileUploadListCreateView(ListCreateAPIView):
         
         return Response(result_list, status=status.HTTP_201_CREATED)
     
-class FileUploadDestroyView(DestroyAPIView):
+class FileView(RetrieveDestroyAPIView):
     serializer_class = FinancialFileSerializer
     queryset = FinancialFile.objects.all()
-    lookup_field = "id"
+    
+    def retrieve(self, request, *args, **kwargs):
+        instance = self.get_object()
+        serializer = self.get_serializer(instance)
+        file_id = serializer.data["id"]
+        result_list = get_data_sets_by_file_id(file_id)
+        
+        return Response(result_list)
 
 
-class FinancialDataListView(ListAPIView):
-    serializer_class = FinancialDataSetSerializer
    

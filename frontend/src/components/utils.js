@@ -145,9 +145,43 @@ export const processDatabaseData = (databaseData) => {
         borderWidth: 1,
         type: "bar",
       },
+
       {
         label: "profit",
         data: profitList,
+        fill: false,
+        borderColor: "#5fd3e7",
+        borderRadius: 10,
+        type: "line",
+      },
+    ],
+  };
+};
+export const defaultDataSets = () => {
+  return {
+    labels: [],
+    datasets: [
+      {
+        label: "Bar Dataset",
+        data: [],
+        backgroundColor: "rgba(25,119,242,255)",
+        borderColor: "rgba(25,119,242,255)",
+        borderRadius: 10,
+        borderWidth: 1,
+        type: "bar",
+      },
+      {
+        label: "Bar Dataset",
+        data: [],
+        backgroundColor: "#ffc143",
+        borderColor: "#ffc143",
+        borderRadius: 10,
+        borderWidth: 1,
+        type: "bar",
+      },
+      {
+        label: "Bar Dataset",
+        data: [],
         backgroundColor: "#5fd3e7",
         borderColor: "#5fd3e7",
         borderRadius: 10,
@@ -155,8 +189,8 @@ export const processDatabaseData = (databaseData) => {
         type: "bar",
       },
       {
-        label: "profit",
-        data: profitList,
+        label: "Line Dataset",
+        data: [],
         fill: false,
         borderColor: "#5fd3e7",
         borderRadius: 10,

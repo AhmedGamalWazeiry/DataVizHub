@@ -28,6 +28,17 @@ services:
     depends_on:
       - db
 
+  frontend: &frontend
+    image: node
+    build:
+      context: frontend
+    volumes:
+      - ./frontend:/home/exampleapp/frontend
+    ports:
+      - "3000:3000"
+    depends_on:
+      - api
+
 volumes:
   postgres_data: {}
   postgres_backups: {}

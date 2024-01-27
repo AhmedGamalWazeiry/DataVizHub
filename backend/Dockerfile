@@ -39,6 +39,8 @@ COPY ./ ./
 
 COPY entrypoint.sh /usr/local/bin/
 
+RUN apt-get install dos2unix && dos2unix /usr/local/bin/entrypoint.sh && apt-get --purge remove -y dos2unix
+
 RUN chmod +x /usr/local/bin/entrypoint.sh
 
 ENTRYPOINT [ "/usr/local/bin/entrypoint.sh" ]
