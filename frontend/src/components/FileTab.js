@@ -2,15 +2,10 @@ import React, { useState, useEffect } from "react";
 import Style from "./FileTab.module.css";
 import InsertDriveFileIcon from "@mui/icons-material/InsertDriveFile";
 import DeleteIcon from "@mui/icons-material/Delete";
-import ClearIcon from "@mui/icons-material/Clear";
 import axios from "axios";
-import baseURL from "./config.js";
+import baseURL from "../config.js";
 import { toast } from "react-toastify";
-import {
-  validateFileExtension,
-  processDatabaseData,
-  defaultDataSets,
-} from "./utils.js";
+import { processDatabaseData, defaultDataSets } from "./utils.js";
 import DeleteCard from "./DeleteCard.js";
 
 export default function FileTap({

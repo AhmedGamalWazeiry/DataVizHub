@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
@@ -58,9 +58,9 @@ function DeleteCard({ open, setOpen, message, file_id, deleteMethod }) {
               fill="#FF4545"
             />
           </svg>
-          <div className={`${Style["delete__container"]}`}>
-            <h3 className={`${Style["delete__title"]}`}>Delete File</h3>
-            <span className={`${Style["delete__description"]}`}>{message}</span>
+          <div className={Style["delete__container"]}>
+            <h3 className={Style["delete__title"]}>Delete File</h3>
+            <span className={Style["delete__description"]}>{message}</span>
           </div>
         </DialogContent>
       </DialogContent>
@@ -73,11 +73,11 @@ function DeleteCard({ open, setOpen, message, file_id, deleteMethod }) {
           marginBottom: 3,
         }}
       >
-        <button className={`${Style["cancel__button"]}`} onClick={handleClose}>
+        <button className={Style["cancel__button"]} onClick={handleClose}>
           Cancel
         </button>
         <button
-          className={`${Style["delete__button"]}`}
+          className={Style["delete__button"]}
           data-cy="delete-button"
           onClick={() => {
             deleteMethod(file_id);

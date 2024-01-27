@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
 import Style from "./Tab.module.css";
-import InsertDriveFileIcon from "@mui/icons-material/InsertDriveFile";
 import FileTap from "./FileTab";
 import SearchIcon from "@mui/icons-material/Search";
-import baseURL from "./config.js";
+import baseURL from "../config.js";
 import axios from "axios";
 
 export default function Tap({ setChartData, chartData }) {

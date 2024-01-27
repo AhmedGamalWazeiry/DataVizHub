@@ -2,7 +2,7 @@ import React, { useRef, useState, useCallback } from "react";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import { useDropzone } from "react-dropzone";
 import axios from "axios";
-import baseURL from "./config.js";
+import baseURL from "../config.js";
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
 import Style from "./Form.module.css";
@@ -27,7 +27,7 @@ export default function Form({ setChartData }) {
           const percentCompleted = Math.round(
             (progressEvent.loaded * 100) / progressEvent.total
           );
-          setUploadPercentage(percentCompleted); // Update the upload progress
+          setUploadPercentage(percentCompleted);
         },
       });
       const newData = processDatabaseData(response.data);

@@ -3,7 +3,6 @@ import Charts from "./Charts";
 import Form from "./Form";
 import { data } from "./utils";
 import Style from "./AnalyticsDashboard.module.css";
-import FileTap from "./FileTab";
 import Tap from "./Tab";
 
 export default function AnalyticsDashboard() {
