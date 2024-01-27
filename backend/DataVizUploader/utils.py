@@ -8,7 +8,10 @@ from django.db import transaction
 def process_csv_file(file):
     return_data_object = {'is_error':False,'error_message':"",'data_frame':None}
     df = pd.read_csv(file.file)
-   
+    
+    df.columns = df.columns.str.lower().str.title()
+    df['Month'] = df['Month'].str.lower().str.title()
+
     columns_to_check = ['Month', 'Revenue', 'Expenses', 'Profit']
     
     if not all(column in df.columns for column in columns_to_check):
@@ -41,15 +44,30 @@ def process_csv_file(file):
                 return_data_object['error_message'] = f"The '{column}' column has empty values."
         
                 return return_data_object
-             
-            
         except ValueError as e:
             return_data_object['is_error'] = True
             return_data_object['error_message'] = f"Error: The values in the '{column}' column are not numeric."
         
             return return_data_object
         
+    
+    # has_positive_revenue = (df['Revenue'] > 0).any()
+    
+    # if not has_positive_revenue:
+    #     return_data_object['is_error'] = True
+    #     return_data_object['error_message'] = f"The Values in the 'Revenue' column must be greater than 0."
         
+    #     return return_data_object
+    
+    # has_positive_expenses = (df['Expenses'] > 0).any()
+     
+    # if not has_positive_expenses:
+    #     return_data_object['is_error'] = True
+    #     return_data_object['error_message'] = f"The Values in the 'Expenses' column must be greater than 0."
+        
+    #     return return_data_object
+        
+     
     duplicates = df.duplicated(subset=['Month'])
     
     if any(duplicates):
