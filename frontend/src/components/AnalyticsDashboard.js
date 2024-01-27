@@ -7,14 +7,18 @@ import Tap from "./Tab";
 
 export default function AnalyticsDashboard() {
   const [chartData, setChartData] = useState(data);
+  const [isFileUploaded, setIsFileUploaded] = useState(false);
 
   return (
     <div className={Style["dashboard"]}>
       <Charts chartData={chartData} />
 
       <div className={Style["dashboard__form"]}>
-        <Form setChartData={setChartData} />
-        <Tap setChartData={setChartData} chartData={chartData} />
+        <Form
+          setChartData={setChartData}
+          setIsFileUploaded={setIsFileUploaded}
+        />
+        <Tap setChartData={setChartData} isFileUploaded={isFileUploaded} />
       </div>
     </div>
   );

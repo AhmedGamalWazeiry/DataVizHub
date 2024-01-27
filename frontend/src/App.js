@@ -1,7 +1,5 @@
 import "./App.css";
-import Charts from "./components/Charts";
 import { Helmet } from "react-helmet";
-import Form from "./components/Form";
 import { ToastContainer } from "react-toastify";
 import AnalyticsDashboard from "./components/AnalyticsDashboard";
 

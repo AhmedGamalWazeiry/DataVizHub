@@ -26,15 +26,11 @@ class FileUploadListCreateView(ListCreateAPIView):
         
         data_frame = return_data_object["data_frame"]
         
-        print(data_frame)
         last_three_columns = data_frame.iloc[:, -3:]
 
-        # Convert the DataFrame to a list of dictionaries
         result_list = last_three_columns.to_dict(orient='list')
         
         file = serializer.save()
-        
-        print(result_list)
         
         try:
             insert_data_into_financial_data_set(return_data_object['data_frame'],file)
