@@ -35,7 +35,14 @@ def process_csv_file(file):
     columns_to_check_num = ['Revenue', 'Expenses', 'Profit']
     for column in columns_to_check_num:
         try:
-            df[column] = pd.to_numeric(df[column])
+            df[column] = pd.to_numeric(df[column].astype(str).str.replace(',', ''), errors='raise')
+            if df[column].empty or df[column].isnull().any():
+                return_data_object['is_error'] = True
+                return_data_object['error_message'] = f"The '{column}' column has empty values."
+        
+                return return_data_object
+             
+            
         except ValueError as e:
             return_data_object['is_error'] = True
             return_data_object['error_message'] = f"Error: The values in the '{column}' column are not numeric."
@@ -64,6 +71,8 @@ def process_csv_file(file):
     df = df.sort_values(by='Month')
     
     return_data_object['data_frame'] = df
+    
+    print(df)
     
     return return_data_object
 

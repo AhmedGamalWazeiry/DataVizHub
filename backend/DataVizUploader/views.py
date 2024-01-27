@@ -35,7 +35,7 @@ class FileUploadListCreateView(ListCreateAPIView):
         try:
             insert_data_into_financial_data_set(return_data_object['data_frame'],file)
         except Exception as e :
-            return Response(return_data_object['An unexpected error occurred during storing the data.'], status=status.HTTP_400_BAD_REQUEST)
+            return Response('An unexpected error occurred during storing the data.', status=status.HTTP_400_BAD_REQUEST)
         
         return Response(result_list, status=status.HTTP_201_CREATED)
     
