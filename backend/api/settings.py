@@ -26,9 +26,10 @@ SECRET_KEY = 'django-insecure-lm_+vofj$cmq5$n*-c$_pqp52gny-azoo9$=n-0ebwywlyoq*o
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["localhost"]
+ALLOWED_HOSTS = ["localhost","127.0.0.1"]
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000", 
+
 ]
 
 # Application definition
@@ -81,11 +82,21 @@ WSGI_APPLICATION = 'api.wsgi.application'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+     'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'postgres_db',
+        'USER': 'postgres',
+        'PASSWORD': 'password',
+        'HOST': 'db',  # This will be the service name in docker-compose.yml
+        'PORT': '5432',
     }
 }
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
 
 
 # Password validation
@@ -122,9 +133,12 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
-STATIC_URL = '/static/'
-MEDIA_URL = "/"
-MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads')
+STATIC_URL = "/django_static/"
+STATIC_ROOT = "/storage/django_static"
+
+# Media files (Files, images, etc...)
+MEDIA_URL = "/chatbot_storage/"
+MEDIA_ROOT = "/chatbot_storage"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field

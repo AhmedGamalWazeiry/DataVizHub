@@ -77,4 +77,17 @@ def insert_data_into_financial_data_set(data_frame,file):
             FinancialDataSet.objects.create(month=month,revenue=revenue,expenses=expenses,profit=profit,financial_file=file)
        
     
+def get_data_sets_by_file_id(file_id):
+    financial_data_sets = FinancialDataSet.objects.filter(financial_file_id=file_id)
+    result_list = {'Revenue':[], 'Expenses':[],'Profit':[]}
+    months = list(calendar.month_name)[1:]
+    
+    for i in months:
+        for j in financial_data_sets:
+          if j.month == i:
+              result_list['Revenue'].append(j.revenue)
+              result_list['Expenses'].append(j.expenses)
+              result_list['Profit'].append(j.profit)
+   
+    return result_list
     

@@ -3,10 +3,11 @@
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  width: 100%;
+  width: 60%;
   max-width: 500px;
   min-width: 300px;
   transition: 1s;
+  margin-bottom: 20px;
 }
 .browse__card {
   display: flex;
@@ -20,6 +21,7 @@
   border-radius: 20px;
   box-shadow: 0 4px 8px 0 rgba(194, 194, 194, 0.2),
     0 6px 20px 0 rgba(114, 114, 114, 0.19);
+  background-color: white;
 }
 
 .browse__button {
